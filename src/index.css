@@ -1,6 +1,44 @@
 * {
     box-sizing: border-box;
 }
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, .8);
+}
+
+
+textarea::-webkit-scrollbar, .markdown-previewer::-webkit-scrollbar {
+  width: 7px;               /* width of the entire scrollbar */
+}
+textarea::-webkit-scrollbar-track, .markdown-previewer::-webkit-scrollbar-track{
+  background: #fff;        /* color of the tracking area */
+}
+textarea::-webkit-scrollbar-thumb, .markdown-previewer::-webkit-scrollbar-thumb{
+  border-radius: 4px;       /* roundness of the scroll thumb */
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+a {
+    color: rgba(33, 181, 111, 1);
+}
+
+p code {
+    background-color: rgba(33, 181, 111, 0.08);
+    border-radius: 3px;
+    padding: 0.2rem, 0.4rem
+}
 .editor-container {
     line-height: 1.6;
 }
@@ -16,8 +54,17 @@
     line-height: 1.6;
 }
 
+.markdown-input{
+    border: 0;
+    outline: none;
+}
 
-.markdown-previewer, .markdown-input textarea {
+
+.markdown-previewer, .markdown-input  {
     max-height: 100vh;
     overflow-y: scroll;
+}
+
+.editor-col {
+  padding: 0 1rem;
 }

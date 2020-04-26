@@ -19,7 +19,9 @@ const App = () => {
 
 ###### Heading 6
 
-Type what you got in your mind
+This line contains **strong** text.
+
+This is \`inline\` code
 
 The following is a link: [link text](https://www.reddit.com)
 
@@ -48,7 +50,7 @@ This is a paragraph
 
         textAreaElement.addEventListener('scroll', onScrollHandler);
         mdPreviewElement.addEventListener('scroll', onScrollHandler);
-    });
+    }, []);
 
     const onScrollHandler = (e) => {
         const editorWrapperNode = editorWrapper.current;

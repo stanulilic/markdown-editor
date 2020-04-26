@@ -3,7 +3,7 @@ import React from 'react';
 const MarkdownPreviewer = (props) => {
     return (
         <div 
-        className="markdown-previewer" 
+        className="markdown-previewer editor-col" 
         dangerouslySetInnerHTML={props.renderMarkdown} />
     )
 

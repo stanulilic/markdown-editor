@@ -2,7 +2,7 @@ import React from 'react';
 
 const TextEditor = (props) => {
     return (
-        <div className="editor">
+        <div className="editor editor-col">
             <textarea 
             defaultValue={props.text} 
             className="markdown-input" 
