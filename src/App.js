@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TextEditor from './TextEditor';
 import MarkdownPreviewer from './MarkdownPreviewer';
 import marked from 'marked';
 
 
 const App = () => {
-    const initialMarkdownText = `# This is a heading
+    const initialMarkdownText = `
+    
+# This is a heading
 
 ## Heading 2
 
@@ -37,6 +39,29 @@ This is a paragraph
 
     `
     const [md, setMarkdown] = useState(initialMarkdownText);
+    const editorWrapper = useRef(null);
+
+    useEffect(() => {
+        const editorWrapperNode = editorWrapper.current;
+        const  textAreaElement = editorWrapperNode.querySelector('textarea');
+        const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
+
+        textAreaElement.addEventListener('scroll', onScrollHandler);
+        mdPreviewElement.addEventListener('scroll', onScrollHandler);
+    });
+
+    const onScrollHandler = (e) => {
+        const editorWrapperNode = editorWrapper.current;
+        const  textAreaElement = editorWrapperNode.querySelector('textarea');
+        const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
+
+        if(e.target.className === 'markdown-input'){
+        mdPreviewElement.scrollTop = textAreaElement.scrollTop;
+        }
+        textAreaElement.scrollTop = mdPreviewElement.scrollTop;
+        
+
+    }
 
     const renderMarkdown = (markdown) => {
         const rawHtml = marked(markdown);
@@ -49,7 +74,7 @@ This is a paragraph
     }
     return (
     <div className="editor-container">
-        <div className="split">
+        <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} changeHandler={changeHandler} />
          <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
         </div>

@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+.editor-container {
+    line-height: 1.6;
+}
 .split {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -10,4 +13,11 @@
 .markdown-input {
     width: 100%;
     height: 100%;
+    line-height: 1.6;
+}
+
+
+.markdown-previewer, .markdown-input textarea {
+    max-height: 100vh;
+    overflow-y: scroll;
 }
