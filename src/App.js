@@ -1,29 +1,48 @@
 import React, { useState } from 'react';
 import TextEditor from './TextEditor';
+import MarkdownPreviewer from './MarkdownPreviewer';
+import marked from 'marked';
 
 
 const App = () => {
-    const initialMarkdownText = `
-    # This is a heading
-     Type what you got in your mind
+    const initialMarkdownText = `# This is a heading
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
 
-     The following is a link: [link text](https://www.reddit.com)
+Type what you got in your mind
 
-     list items:
+The following is a link: [link text](https://www.reddit.com)
 
-     - houses
-     - cars
-     - animals
+unordered list items:
 
-     This is a paragraph
+- houses
+- cars
+- animals
 
-     ## This is second heading
+ordered list items:
+
+1. first
+2. second
+3. fourth
+
+This is a paragraph
+
     `
-    const [text, setText] = useState(initialMarkdownText);
+    const [md, setMarkdown] = useState(initialMarkdownText);
+
+    const renderMarkdown = (markdown) => {
+        const rawHtml = marked(markdown);
+        return {__html: rawHtml}
+
+    }
     return (
     <div className="editor-container">
-        <div class="split">
-         <TextEditor text={text} />
+        <div className="split">
+         <TextEditor text={md} />
+         <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
         </div>
     </div>
     );
