@@ -1,11 +1,12 @@
 import React from 'react';
+import TextEditor from './TextEditor';
 
-const name = "stanley ulili"
 const App = () => {
     return (
-    <div>
-    <h1>Hello World</h1>
-    <p>{name}</p>
+    <div className="editor-container">
+        <div class="split">
+         <TextEditor />
+        </div>
     </div>
     );
 };
