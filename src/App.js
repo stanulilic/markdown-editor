@@ -50,17 +50,26 @@ This is a paragraph
 
         textAreaElement.addEventListener('scroll', onScrollHandler);
         mdPreviewElement.addEventListener('scroll', onScrollHandler);
+        // scroll to bottom
+        textAreaElement.scrollTop = textAreaElement.scrollHeight;
+        mdPreviewElement.scrollTop = mdPreviewElement.scrollHeight;
     }, []);
 
     const onScrollHandler = (e) => {
         const editorWrapperNode = editorWrapper.current;
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
         const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
+        if(e.type === 'change') {
+        textAreaElement.scrollTop = textAreaElement.scrollHeight;
+        }
+        else{
 
         if(e.target.className === 'markdown-input'){
         mdPreviewElement.scrollTop = textAreaElement.scrollTop;
-        }
+        }else {
         textAreaElement.scrollTop = mdPreviewElement.scrollTop;
+        }
+    }
         
 
     }
@@ -72,7 +81,8 @@ This is a paragraph
     }
 
     const changeHandler = (e) => {
-        setMarkdown(e.target.value)
+        setMarkdown(e.target.value);
+        onScrollHandler(e);
     }
     return (
     <div className="editor-container">
