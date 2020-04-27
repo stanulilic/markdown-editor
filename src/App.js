@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TextEditor from './TextEditor';
 import MarkdownPreviewer from './MarkdownPreviewer';
+import Nav from './Nav';
 import marked from 'marked';
-
 
 const App = () => {
     const initialMarkdownText = `
@@ -85,11 +85,14 @@ This is a paragraph
         onScrollHandler(e);
     }
     return (
+    <div>
+     <Nav />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} changeHandler={changeHandler} />
          <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
         </div>
+    </div>
     </div>
     );
 };
