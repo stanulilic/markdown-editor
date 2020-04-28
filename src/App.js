@@ -55,6 +55,10 @@ This is a paragraph
         mdPreviewElement.scrollTop = mdPreviewElement.scrollHeight;
     }, []);
 
+    const updateMarkdownState =(newValue) => {
+        setMarkdown(newValue)
+    };
+
     const onScrollHandler = (e) => {
         const editorWrapperNode = editorWrapper.current;
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
@@ -86,7 +90,7 @@ This is a paragraph
     }
     return (
     <div>
-     <Nav textAreaRef={editorWrapper} />
+     <Nav textAreaRef={editorWrapper} updateMarkdownState={updateMarkdownState} />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} changeHandler={changeHandler} />

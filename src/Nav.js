@@ -39,7 +39,20 @@ const EditingIcons = (props) => {
 
     const makeBold = () => {
         const textArea = getTextArea();
-        console.log(textArea);
+        let text = "**strong text**";
+        const startPos = textArea.selectionStart;
+        const endPos = textArea.selectionEnd;
+        // if text is highlighted or selected
+        if(startPos !== endPos) {
+            const selectedText = textArea.value.slice(startPos, endPos);
+            text = `**${selectedText}**`;
+        }
+        const textBeforeCursorPosition = textArea.value.substring(0, startPos)
+        const textAfterCursorPosition = textArea.value.substring(endPos, textArea.value.length)
+
+        const currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+        textArea.value = currentValue;
+        props.updateMarkdownState(currentValue);
     }
 
     return (
@@ -74,7 +87,7 @@ const Nav = (props) => {
     return (
         <header>
             <nav className="navbar">
-                <EditingIcons textAreaRef={props.textAreaRef} />
+                <EditingIcons textAreaRef={props.textAreaRef} updateMarkdownState={props.updateMarkdownState} />
                 <NavbarMainTools />
             </nav>
         </header>
