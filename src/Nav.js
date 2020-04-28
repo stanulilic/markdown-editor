@@ -61,12 +61,12 @@ const EditingIcons = (props) => {
 
     return (
         <div className="navbar__editing nav-child">
-            <IconElement   title="Redo" label="Redo"><RedoIcon /></IconElement>
+            <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("**strong text**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("*emphasized text*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
             <IconElement  title="Heading" label="Heading"><HeadingIcon /></IconElement>
-            <IconElement  title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
             <IconElement  title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
