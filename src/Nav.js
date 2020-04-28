@@ -59,7 +59,7 @@ const EditingIcons = (props) => {
             currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
         }
         else {
-            currentValue  = `${textBeforeCursorPosition}\n${text}${textAfterCursorPosition}`; 
+            currentValue  = `${textBeforeCursorPosition}\n${text}\n${textAfterCursorPosition}`; 
         }
 
         textArea.value = currentValue;
@@ -76,7 +76,7 @@ const EditingIcons = (props) => {
             <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
             <IconElement  title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
-            <IconElement  title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
             <IconElement  title="Code" label="Code"><CodeIcon /></IconElement>
             <IconElement  title="Link" label="Link"><LinkIcon /></IconElement>
             <IconElement  title="Image" label="Image"><ImageIcon /></IconElement>

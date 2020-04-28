@@ -86,10 +86,25 @@ svg {
     justify-self: end;
 }
 
+blockquote {
+    color: rgba(0, 0, 0, .5);
+    padding-left: 1.5em;
+    border-left: 5px solid rgba(0, 0, 0, .5);
+    ;
+}
+
+pre {
+    background-color: rgba(33, 181, 111, 0.08);
+    border-radius: 3px;
+    border: 0;
+    line-height: 1.6;
+    padding: 1rem;
+}
+
 p code {
     background-color: rgba(33, 181, 111, 0.08);
     border-radius: 3px;
-    padding: 0.2rem, 0.4rem
+    padding: 0.2rem 0.4rem;
 }
 
 .editor-container {
