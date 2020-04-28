@@ -86,7 +86,7 @@ This is a paragraph
     }
     return (
     <div>
-     <Nav />
+     <Nav textAreaRef={editorWrapper} />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} changeHandler={changeHandler} />

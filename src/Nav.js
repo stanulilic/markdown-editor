@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ReactComponent as BoldIcon} from './icons/bold.svg';
 import { ReactComponent as LinkIcon} from './icons/chain.svg';
 import { ReactComponent as CodeIcon} from './icons/code.svg';
@@ -21,19 +21,32 @@ import { ReactComponent as UndoIcon} from './icons/undo2.svg';
 const IconElement = (props) => {
     return (
             <div>
-                <button class="navbar__button" title={props.title} arial-label={props.label}>
+                <button onClick={props.handleClick} className="navbar__button" title={props.title} arial-label={props.label}>
                 {props.children}
                 </button>
             </div>
     )
 
 }
-const EditingIcons = () => {
+const EditingIcons = (props) => {
+
+    const getTextArea = () => {
+        const editorWrapperNode = props.textAreaRef.current;
+        const  textAreaElement = editorWrapperNode.querySelector('textarea');
+        return textAreaElement;
+
+    }
+
+    const makeBold = () => {
+        const textArea = getTextArea();
+        console.log(textArea);
+    }
+
     return (
-        <div class="navbar__editing nav-child">
-            <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
+        <div className="navbar__editing nav-child">
+            <IconElement   title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
-            <IconElement  title="Bold" label="Bold"><BoldIcon /></IconElement>
+            <IconElement  handleClick={makeBold} title="Bold" label="Bold"><BoldIcon /></IconElement>
             <IconElement  title="Italic" label="Italic"><ItalicIcon /></IconElement>
             <IconElement  title="Heading" label="Heading"><HeadingIcon /></IconElement>
             <IconElement  title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
@@ -49,7 +62,7 @@ const EditingIcons = () => {
 
 const NavbarMainTools = () => {
     return (
-        <div class="navbar__maintools nav-child">
+        <div className="navbar__maintools nav-child">
             <IconElement  title="Open File" label="Open File"><OpenFileIcon /></IconElement>
             <IconElement  title="Export" label="Export"><DownloadIcon /></IconElement>
         </div>
@@ -57,11 +70,11 @@ const NavbarMainTools = () => {
 } 
 
 
-const Nav = () => {
+const Nav = (props) => {
     return (
         <header>
-            <nav class="navbar">
-                <EditingIcons />
+            <nav className="navbar">
+                <EditingIcons textAreaRef={props.textAreaRef} />
                 <NavbarMainTools />
             </nav>
         </header>
