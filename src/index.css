@@ -50,6 +50,42 @@ a {
     color: rgba(33, 181, 111, 1);
 }
 
+svg {
+    width: 20px;
+    height: 20px;
+    fill: rgb(136, 136, 136);
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #2c2c2c;
+    padding: 0 .5rem;
+}
+
+.nav-child {
+    display: flex;
+}
+
+.navbar button {
+    background: none;
+    border: 0;
+    padding: .5rem;
+    outline: none;
+}
+
+.navbar button:hover {
+    background-color: hsla(0, 0%, 100%, .1);
+}
+
+.navbar button:hover svg {
+    fill: #fff;
+}
+
+.navbar__maintools {
+    justify-self: end;
+}
+
 p code {
     background-color: rgba(33, 181, 111, 0.08);
     border-radius: 3px;
