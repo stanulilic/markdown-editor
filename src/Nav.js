@@ -64,7 +64,7 @@ const EditingIcons = (props) => {
             <IconElement   title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("**strong text**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
-            <IconElement  title="Italic" label="Italic"><ItalicIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("*emphasized text*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
             <IconElement  title="Heading" label="Heading"><HeadingIcon /></IconElement>
             <IconElement  title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
