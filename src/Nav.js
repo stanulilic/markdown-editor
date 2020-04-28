@@ -75,7 +75,7 @@ const EditingIcons = (props) => {
             <IconElement  handleClick={() => {formatText("# heading", "#", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("- list item one\n- list item two", "- ", "")}} title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
-            <IconElement  title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
             <IconElement  title="Code" label="Code"><CodeIcon /></IconElement>
             <IconElement  title="Link" label="Link"><LinkIcon /></IconElement>
