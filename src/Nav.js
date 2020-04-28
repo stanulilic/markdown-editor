@@ -37,15 +37,19 @@ const EditingIcons = (props) => {
 
     }
 
-    const makeBold = () => {
+    const changeSelectedText = (textArea, startPos, endPos, enclosingText) => {
+            const selectedText = textArea.value.slice(startPos, endPos);
+            const output = `${enclosingText}${selectedText}${enclosingText}`
+            return output;
+    }
+    const formatText = (defaultText, enclosingText) => {
         const textArea = getTextArea();
-        let text = "**strong text**";
+        let text = defaultText;
         const startPos = textArea.selectionStart;
         const endPos = textArea.selectionEnd;
         // if text is highlighted or selected
         if(startPos !== endPos) {
-            const selectedText = textArea.value.slice(startPos, endPos);
-            text = `**${selectedText}**`;
+            text = changeSelectedText(textArea, startPos, endPos, enclosingText)
         }
         const textBeforeCursorPosition = textArea.value.substring(0, startPos)
         const textAfterCursorPosition = textArea.value.substring(endPos, textArea.value.length)
@@ -59,7 +63,7 @@ const EditingIcons = (props) => {
         <div className="navbar__editing nav-child">
             <IconElement   title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
-            <IconElement  handleClick={makeBold} title="Bold" label="Bold"><BoldIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("**strong text**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
             <IconElement  title="Italic" label="Italic"><ItalicIcon /></IconElement>
             <IconElement  title="Heading" label="Heading"><HeadingIcon /></IconElement>
             <IconElement  title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
