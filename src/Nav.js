@@ -37,24 +37,31 @@ const EditingIcons = (props) => {
 
     }
 
-    const changeSelectedText = (textArea, startPos, endPos, enclosingText) => {
+    const changeSelectedText = (textArea, startPos, endPos, enclosingTextStart, enclosingTextEnd) => {
             const selectedText = textArea.value.slice(startPos, endPos);
-            const output = `${enclosingText}${selectedText}${enclosingText}`
+            const output = `${enclosingTextStart}${selectedText}${enclosingTextEnd}`
             return output;
     }
-    const formatText = (defaultText, enclosingText) => {
+    const formatText = (defaultText, enclosingTextStart, enclosingTextEnd) => {
+        let currentValue = null;
         const textArea = getTextArea();
         let text = defaultText;
         const startPos = textArea.selectionStart;
         const endPos = textArea.selectionEnd;
         // if text is highlighted or selected
         if(startPos !== endPos) {
-            text = changeSelectedText(textArea, startPos, endPos, enclosingText)
+            text = changeSelectedText(textArea, startPos, endPos, enclosingTextStart, enclosingTextEnd)
         }
         const textBeforeCursorPosition = textArea.value.substring(0, startPos)
         const textAfterCursorPosition = textArea.value.substring(endPos, textArea.value.length)
 
-        const currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+        if(enclosingTextEnd){
+            currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+        }
+        else {
+            currentValue  = `${textBeforeCursorPosition}\n${text}${textAfterCursorPosition}`; 
+        }
+
         textArea.value = currentValue;
         props.updateMarkdownState(currentValue);
     }
@@ -63,10 +70,10 @@ const EditingIcons = (props) => {
         <div className="navbar__editing nav-child">
             <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("**strong text**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("*emphasized text*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
-            <IconElement  title="Heading" label="Heading"><HeadingIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "**")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("# heading", "#", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
             <IconElement  title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
