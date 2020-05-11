@@ -42,6 +42,37 @@ const EditingIcons = (props) => {
             const output = `${enclosingTextStart}${selectedText}${enclosingTextEnd}`
             return output;
     }
+
+    const formatMarkdownCode = ()  => {
+        let currentValue = null;
+        const textArea = getTextArea();
+        let text = "`enter code here`";
+        const startPos = textArea.selectionStart;
+        const endPos = textArea.selectionEnd;
+        const textBeforeCursorPosition = textArea.value.substring(0, startPos)
+        const textAfterCursorPosition = textArea.value.substring(endPos, textArea.value.length)
+        const lines = textArea.value.substring(0, startPos).split("\n");
+        // check if cursor is non-empty line
+        if(lines[lines.length - 1 ]) {
+            if(startPos !== endPos) {
+                text = changeSelectedText(textArea, startPos, endPos, "`", "`");
+            }
+            
+        }
+        else {
+            const enclosers = "```\n";
+            const enclosingTextEnd = "\n```";
+            text = `\n${enclosers}enter code here\n${enclosers}`;
+            // if text is highlighted
+            if(startPos !== endPos) {
+                text = changeSelectedText(textArea, startPos, endPos, enclosers, enclosingTextEnd);
+            }
+        }
+        currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+        textArea.value = currentValue;
+        props.updateMarkdownState(currentValue);
+
+    }
     const formatText = (defaultText, enclosingTextStart, enclosingTextEnd) => {
         let currentValue = null;
         const textArea = getTextArea();
@@ -71,13 +102,13 @@ const EditingIcons = (props) => {
             <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
             <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "**")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("# heading", "#", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
+            <IconElement  handleClick={() => {formatText("# heading", "# ", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("- list item one\n- list item two", "- ", "")}} title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
-            <IconElement  title="Code" label="Code"><CodeIcon /></IconElement>
+            <IconElement  handleClick={() => { formatMarkdownCode()}}  title="Code" label="Code"><CodeIcon /></IconElement>
             <IconElement  title="Link" label="Link"><LinkIcon /></IconElement>
             <IconElement  title="Image" label="Image"><ImageIcon /></IconElement>
         </div>

@@ -56,6 +56,11 @@ svg {
     fill: rgb(136, 136, 136);
 }
 
+header {
+    position: absolute;
+    width: 100%;
+}
+
 .navbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -109,6 +114,7 @@ p code {
 
 .editor-container {
     line-height: 1.6;
+    padding-top: 39px;
 }
 
 .split {

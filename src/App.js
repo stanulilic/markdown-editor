@@ -6,7 +6,6 @@ import marked from 'marked';
 
 const App = () => {
     const initialMarkdownText = `
-    
 # This is a heading
 
 ## Heading 2
@@ -86,7 +85,7 @@ This is a paragraph
 
     const changeHandler = (e) => {
         setMarkdown(e.target.value);
-        onScrollHandler(e);
+        // onScrollHandler(e);
     }
     return (
     <div>
