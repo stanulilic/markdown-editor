@@ -53,7 +53,7 @@ a {
 svg {
     width: 20px;
     height: 20px;
-    fill: rgb(136, 136, 136);
+    fill: #fff;
 }
 
 header {
@@ -64,7 +64,7 @@ header {
 .navbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #2c2c2c;
+    background: #2196F3;
     padding: 0 .5rem;
 }
 
@@ -147,4 +147,70 @@ p code {
 .markdown-input {
     max-height: 100vh;
     overflow-y: scroll;
+}
+
+/* Modal */
+.modal__wrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: hsla(207, 50%, 36%, 0.5);
+}
+
+.modal__content {
+    min-width: 320px;
+    max-width: 480px;
+    margin: 5rem auto;
+    padding: 2rem 3rem 3rem;
+    background: #fff;
+    position: relative;
+}
+
+.modal__header,
+.modal__body,
+.modal__body p {
+    margin-bottom: 2rem;
+}
+
+.modal__close-btn {
+    position: absolute;
+    top: 11px;
+    right: 7px;
+    background: none;
+    outline: 0;
+    border: none;
+}
+
+.modal__close-btn svg {
+    fill: grey;
+}
+
+.modal__label {
+    display: block;
+    margin-bottom: .7rem;
+}
+
+.modal__input {
+    width: 100%;
+    padding: .6rem;
+}
+
+.modal__footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-footer__btn {
+    background: none;
+    text-transform: uppercase;
+    border: 0;
+    padding: 0.5rem .8rem;
+}
+
+.modal__okay-btn {
+    background: #2196f3;
+    color: #fff;
 }

@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import Modal from './Modal.js';
 import { ReactComponent as BoldIcon} from './icons/bold.svg';
 import { ReactComponent as LinkIcon} from './icons/chain.svg';
 import { ReactComponent as CodeIcon} from './icons/code.svg';
@@ -17,6 +18,7 @@ import { ReactComponent as DownloadIcon} from './icons/download.svg';
 import { ReactComponent as OpenFileIcon} from './icons/folder-open.svg';
 import { ReactComponent as RedoIcon} from './icons/redo2.svg';
 import { ReactComponent as UndoIcon} from './icons/undo2.svg';
+import { ReactComponent as CloseIcon } from './icons/close.svg';
 
 const IconElement = (props) => {
     return (
@@ -29,6 +31,7 @@ const IconElement = (props) => {
 
 }
 const EditingIcons = (props) => {
+
 
     const getTextArea = () => {
         const editorWrapperNode = props.textAreaRef.current;
@@ -109,7 +112,7 @@ const EditingIcons = (props) => {
             <IconElement  handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
             <IconElement  handleClick={() => { formatMarkdownCode()}}  title="Code" label="Code"><CodeIcon /></IconElement>
-            <IconElement  title="Link" label="Link"><LinkIcon /></IconElement>
+            <IconElement  handleClick={() => {props.toggleModal()}} title="Link" label="Link"><LinkIcon /></IconElement>
             <IconElement  title="Image" label="Image"><ImageIcon /></IconElement>
         </div>
     )
@@ -126,14 +129,42 @@ const NavbarMainTools = () => {
 
 
 const Nav = (props) => {
+    const [ showModal, setModal] = useState(false);
+
+    const toggleModal = () => setModal(!showModal);
     return (
         <header>
             <nav className="navbar">
-                <EditingIcons textAreaRef={props.textAreaRef} updateMarkdownState={props.updateMarkdownState} />
+                <EditingIcons textAreaRef={props.textAreaRef} 
+                toggleModal={toggleModal} 
+                updateMarkdownState={props.updateMarkdownState} />
                 <NavbarMainTools />
+                { showModal ? (
+                    <Modal>
+                    <div className="modal__wrap">
+                        <div className="modal__content">
+                         <div className="modal__header">
+                            <button className="modal__close-btn" id="close-modal" title="close modal" arial-label="Close Modal">
+                          <CloseIcon />
+                        </button>
+                        </div>
+                        <div className="modal__body">
+                          <p>Please provide a <b>URL</b> for your link.</p>
+                            <div className="modal__form">
+                            <label htmlFor="url" className="modal__label">URL</label>
+                            <input type="url" name="url" className="modal__input" />
+                            </div>
+                        </div>
+                        <div className="modal__footer modal_buttons">
+                            <button className="modal-footer__btn modal__cancel-btn">Cancel</button>
+                            <button className="modal-footer__btn modal__okay-btn">Ok</button>
+                        </div>
+                        </div>
+                    </div>
+                    </Modal>
+                ): null}
             </nav>
         </header>
-
     )
 };
 
