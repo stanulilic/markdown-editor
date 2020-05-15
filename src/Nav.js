@@ -144,7 +144,7 @@ const Nav = (props) => {
                     <div className="modal__wrap">
                         <div className="modal__content">
                          <div className="modal__header">
-                            <button className="modal__close-btn" id="close-modal" title="close modal" arial-label="Close Modal">
+                            <button  onClick={() => {toggleModal()}} className="modal__close-btn" id="close-modal" title="close modal" arial-label="Close Modal">
                           <CloseIcon />
                         </button>
                         </div>
@@ -156,7 +156,7 @@ const Nav = (props) => {
                             </div>
                         </div>
                         <div className="modal__footer modal_buttons">
-                            <button className="modal-footer__btn modal__cancel-btn">Cancel</button>
+                            <button onClick={() => {toggleModal()}} className="modal-footer__btn modal__cancel-btn">Cancel</button>
                             <button className="modal-footer__btn modal__okay-btn">Ok</button>
                         </div>
                         </div>
