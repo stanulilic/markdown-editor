@@ -36,11 +36,17 @@ ordered list items:
 2. second
 3. fourth
 
-This is a paragraph
-
-    `
+This is a paragraph`
     const [md, setMarkdown] = useState(initialMarkdownText);
+    const [cursorPos, setCursorPos] = useState(md.length);
     const editorWrapper = useRef(null);
+    useEffect(() =>{
+        const textArea = getTextArea();
+        textArea.focus();
+        textArea.selectionStart = cursorPos;
+        textArea.selectionEnd = cursorPos;
+
+    }, [cursorPos]);
 
     useEffect(() => {
         const editorWrapperNode = editorWrapper.current;
@@ -87,9 +93,17 @@ This is a paragraph
         setMarkdown(e.target.value);
         // onScrollHandler(e);
     }
+    const getTextArea = () => {
+
+        const editorWrapperNode = editorWrapper.current;
+        const  textAreaElement = editorWrapperNode.querySelector('textarea');
+        return textAreaElement;
+
+    }
+
     return (
     <div>
-     <Nav textAreaRef={editorWrapper} updateMarkdownState={updateMarkdownState} />
+     <Nav getTextArea={getTextArea} setCursorPos={setCursorPos}  updateMarkdownState={updateMarkdownState} />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} changeHandler={changeHandler} />

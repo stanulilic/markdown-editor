@@ -41,6 +41,8 @@ const EditingIcons = (props) => {
 
     const formatMarkdownCode = ()  => {
         let currentValue = null;
+        let cursorIndex = 0;
+        let  curString = "";
         const textArea = props.getTextArea();
         let text = "`enter code here`";
         const startPos = textArea.selectionStart;
@@ -65,12 +67,17 @@ const EditingIcons = (props) => {
             }
         }
         currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+        curString = `${textBeforeCursorPosition}${text}`;
         textArea.value = currentValue;
+        cursorIndex = Number(curString.length);
         props.updateMarkdownState(currentValue);
+        props.setCursorPos(cursorIndex);
 
     }
     const formatText = (defaultText, enclosingTextStart, enclosingTextEnd) => {
         let currentValue = null;
+        let cursorIndex = 0;
+        let  curString = "";
         const textArea = props.getTextArea();
         let text = defaultText;
         const startPos = textArea.selectionStart;
@@ -84,13 +91,18 @@ const EditingIcons = (props) => {
 
         if(enclosingTextEnd){
             currentValue  = `${textBeforeCursorPosition}${text}${textAfterCursorPosition}`; 
+            curString = `${textBeforeCursorPosition}${text}`;
         }
         else {
             currentValue  = `${textBeforeCursorPosition}\n${text}\n${textAfterCursorPosition}`; 
+            curString = `${textBeforeCursorPosition}\n${text}`;
         }
 
         textArea.value = currentValue;
+        // get last inserted character index position
+        cursorIndex = Number(curString.length);
         props.updateMarkdownState(currentValue);
+        props.setCursorPos(cursorIndex);
     }
 
     return (
@@ -141,17 +153,12 @@ const Nav = (props) => {
     const toggleModal = () => {
         setModal(!showModal)
     };
-    const getTextArea = () => {
-        const editorWrapperNode = props.textAreaRef.current;
-        const  textAreaElement = editorWrapperNode.querySelector('textarea');
-        return textAreaElement;
-
-    }
-
 
     const formatMarkdownLink = (type, url) => {
         let currentValue = null;
-        const textArea = getTextArea();
+        const textArea = props.getTextArea();
+        let cursorIndex = 0;
+        let  curString = "";
         let text = null;
         let exclamation = "";
         const startPos = textArea.selectionStart;
@@ -172,23 +179,29 @@ const Nav = (props) => {
         }
         if(lines[lines.length - 1 ]) {
             currentValue  = `${textBeforeCursorPosition} ${exclamation}[${text}](${url}) ${textAfterCursorPosition}`; 
+            curString = `${textBeforeCursorPosition} ${exclamation}[${text}](${url})`
         }else{
             currentValue  = `${textBeforeCursorPosition}\n${exclamation}[${text}](${url})\n${textAfterCursorPosition}`; 
+            curString = `${textBeforeCursorPosition}\n${exclamation}[${text}](${url})`;
         }
 
         textArea.value = currentValue;
+        // get last inserted character index position
+        cursorIndex = Number(curString.length);
         props.updateMarkdownState(currentValue);
+        props.setCursorPos(cursorIndex);
         toggleModal();
     }
 
     return (
         <header>
             <nav className="navbar">
-                <EditingIcons textAreaRef={props.textAreaRef} 
+                <EditingIcons  
                 toggleModal={toggleModal}
                 setMarkdownImagelink={setMarkdownImagelink}
-                getTextArea={getTextArea}
-                updateMarkdownState={props.updateMarkdownState} />
+                getTextArea={props.getTextArea}
+                updateMarkdownState={props.updateMarkdownState}
+                setCursorPos={props.setCursorPos} />
                 <NavbarMainTools />
                 { showModal ? (
                     <Modal>
