@@ -105,8 +105,8 @@ const EditingIcons = (props) => {
             <IconElement  handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
             <IconElement  handleClick={() => { formatMarkdownCode()}}  title="Code" label="Code"><CodeIcon /></IconElement>
-            <IconElement  handleClick={() => {props.toggleModal()}} title="Link" label="Link" id="format-link"><LinkIcon /></IconElement>
-            <IconElement  title="Image" label="Image"><ImageIcon /></IconElement>
+            <IconElement  handleClick={() => {props.setMarkdownImagelink(false);props.toggleModal()}} title="Link" label="Link" id="format-link"><LinkIcon /></IconElement>
+            <IconElement  handleClick={() => {props.setMarkdownImagelink(true);props.toggleModal()}} title="Image" label="Image"><ImageIcon /></IconElement>
         </div>
     )
 }
@@ -131,6 +131,9 @@ const Nav = (props) => {
         // check if markdown link button is clicked
         if(!markdownImageLink) {
             setDescription("Please provide a URL for your link.");
+        } 
+        else {
+            setDescription("Please provide a URL for your image.");
         }
 
     }, [markdownImageLink]);
@@ -150,22 +153,27 @@ const Nav = (props) => {
         let currentValue = null;
         const textArea = getTextArea();
         let text = null;
-        if(type === "anchor") {
-            text = "enter link description here";
-        }
+        let exclamation = "";
         const startPos = textArea.selectionStart;
         const endPos = textArea.selectionEnd;
         const textBeforeCursorPosition = textArea.value.substring(0, startPos)
         const textAfterCursorPosition = textArea.value.substring(endPos, textArea.value.length)
         const lines = textArea.value.substring(0, startPos).split("\n");
+        if(type === "anchor") {
+            text = "enter link description here";
+        }else{
+            text = "enter image description here";
+            exclamation = "!";
+        }
          
+
         if(startPos !== endPos) {
             text = textArea.value.slice(startPos, endPos);
         }
         if(lines[lines.length - 1 ]) {
-            currentValue  = `${textBeforeCursorPosition} [${text}](${url}) ${textAfterCursorPosition}`; 
+            currentValue  = `${textBeforeCursorPosition} ${exclamation}[${text}](${url}) ${textAfterCursorPosition}`; 
         }else{
-            currentValue  = `${textBeforeCursorPosition}\n[${text}](${url})\n${textAfterCursorPosition}`; 
+            currentValue  = `${textBeforeCursorPosition}\n${exclamation}[${text}](${url})\n${textAfterCursorPosition}`; 
         }
 
         textArea.value = currentValue;
@@ -177,7 +185,8 @@ const Nav = (props) => {
         <header>
             <nav className="navbar">
                 <EditingIcons textAreaRef={props.textAreaRef} 
-                toggleModal={toggleModal} 
+                toggleModal={toggleModal}
+                setMarkdownImagelink={setMarkdownImagelink}
                 getTextArea={getTextArea}
                 updateMarkdownState={props.updateMarkdownState} />
                 <NavbarMainTools />
@@ -189,6 +198,9 @@ const Nav = (props) => {
                             // check if markdown link button is clicked
                             if(!markdownImageLink) {
                                 formatMarkdownLink("anchor", event.target.elements.url.value);
+                            }
+                            else {
+                                formatMarkdownLink("image", event.target.elements.url.value);
                             }
                         }} 
                         className="modal__content">
