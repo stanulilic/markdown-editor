@@ -121,10 +121,31 @@ const EditingIcons = (props) => {
     )
 }
 
-const NavbarMainTools = () => {
+const NavbarMainTools = (props) => {
+    const inputEl = useRef(null);
+
+    const readMarkdownFile = (e) => {
+        const file = e.target.files[0];
+        if(!file) {
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const contents = e.target.result;
+            props.setMarkdown(contents);
+            const textArea = props.getTextArea();
+            textArea.value = contents;
+            props.saveHistory(contents);
+        }
+        reader.readAsText(file);
+    }
+
+    
     return (
         <div className="navbar__maintools nav-child">
-            <IconElement  title="Open File" label="Open File"><OpenFileIcon /></IconElement>
+            <input onChange={(e) => {readMarkdownFile(e)}} type="file" id="upload" name="upload" ref={inputEl} />
+            <IconElement  handleClick={() => { inputEl.current.click() }} title="Open File" label="Open File"><OpenFileIcon /></IconElement>
             <IconElement  title="Export" label="Export"><DownloadIcon /></IconElement>
         </div>
     )
@@ -203,7 +224,9 @@ const Nav = (props) => {
                 handleRedo={props.handleRedo}
                 undoState={props.undoState}
                 historyStep={props.historyStep} />
-                <NavbarMainTools />
+                <NavbarMainTools setMarkdown={props.setMarkdown}
+                getTextArea={props.getTextArea}
+                saveHistory={props.saveHistory} />
                 { showModal ? (
                     <Modal>
                     <div className="modal__wrap">

@@ -157,10 +157,14 @@ This is a paragraph`];
        if(key === 8 || key === 46 || key === 13){
         const textArea = getTextArea();
         const newValue = textArea.value;
+        saveHistory(newValue);
+       }
+    }
+
+    const saveHistory = (newValue) => {
         const newMdHistory = mdHistory.slice(0, historyStep + 1);
         setMdHistory(newMdHistory.concat([newValue]));
         setHistoryStep(historyStep += 1);
-       }
     }
 
     const getTextArea = () => {
@@ -179,7 +183,9 @@ This is a paragraph`];
      handleUndo={handleUndo}
      handleRedo={handleRedo}
      historyStep={historyStep}
-     undoState={undoState} />
+     undoState={undoState}
+     setMarkdown={setMarkdown}
+     saveHistory={saveHistory} />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />
