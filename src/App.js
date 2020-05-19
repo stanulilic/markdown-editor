@@ -78,6 +78,7 @@ This is a paragraph`];
         // undo to previous state
         const textArea = getTextArea();
         if(historyStep === mdHistory.length -1 ) {
+            setUndoState(false); // disable button if no more redo's
             return;
         }
         const newHistoryStep = historyStep + 1;
