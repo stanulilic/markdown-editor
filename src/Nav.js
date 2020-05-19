@@ -23,7 +23,7 @@ import { ReactComponent as CloseIcon } from './icons/close.svg';
 const IconElement = (props) => {
     return (
             <div>
-                <button onClick={props.handleClick} className="navbar__button" title={props.title} arial-label={props.label} id={props.id}>
+                <button onClick={props.handleClick} className="navbar__button" title={props.title} arial-label={props.label} id={props.id} disabled={props.disabled}>
                 {props.children}
                 </button>
             </div>
@@ -108,7 +108,7 @@ const EditingIcons = (props) => {
     return (
         <div className="navbar__editing nav-child">
             <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
-            <IconElement  title="Undo" label="Undo"><UndoIcon /></IconElement>
+            <IconElement  handleClick={() => { props.handleUndo()}} title="Undo" label="Undo" disabled={!props.historyStep}><UndoIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("# heading", "# ", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
@@ -201,7 +201,9 @@ const Nav = (props) => {
                 setMarkdownImagelink={setMarkdownImagelink}
                 getTextArea={props.getTextArea}
                 updateMarkdownState={props.updateMarkdownState}
-                setCursorPos={props.setCursorPos} />
+                setCursorPos={props.setCursorPos}
+                handleUndo={props.handleUndo}
+                historyStep={props.historyStep} />
                 <NavbarMainTools />
                 { showModal ? (
                     <Modal>

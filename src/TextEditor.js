@@ -6,7 +6,8 @@ const TextEditor = (props) => {
             <textarea 
             defaultValue={props.text} 
             className="markdown-input" 
-            onBlur={props.changeHandler} onChange={props.changeHandler}>
+            onBlur={props.changeHandler} onChange={props.changeHandler}
+            onKeyDown={props.keyDownHandler}>
             </textarea>
         </div>
     )

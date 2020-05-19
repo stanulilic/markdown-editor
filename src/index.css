@@ -56,6 +56,14 @@ svg {
     fill: #fff;
 }
 
+button:disabled svg {
+    fill: #6c757d;
+}
+
+.navbar button:disabled:hover svg {
+    fill: #6c757d;
+}
+
 header {
     position: fixed;
     width: 100%;
