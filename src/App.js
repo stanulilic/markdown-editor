@@ -38,8 +38,6 @@ ordered list items:
 
 This is a paragraph`];
    
-// https://konvajs.org/docs/react/Undo-Redo.html 
-// https://medium.com/better-programming/enhance-your-react-app-with-undo-and-reset-abilities-cee6f37af0d9
     const [mdHistory, setMdHistory] = useState(mdInitialHistory);
     const [md, setMarkdown] = useState(mdHistory[0]);
     let [historyStep, setHistoryStep] = useState(0);

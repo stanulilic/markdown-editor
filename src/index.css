@@ -122,7 +122,7 @@ p code {
 
 .editor-container {
     line-height: 1.6;
-    /* padding-top: 39px; */
+    padding-top: 39px;
 }
 
 .split {
@@ -145,6 +145,7 @@ p code {
 .markdown-input {
     border: 0;
     outline: none;
+    padding-bottom: 8rem;
 }
 
 
