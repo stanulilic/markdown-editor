@@ -70,8 +70,7 @@ const EditingIcons = (props) => {
         curString = `${textBeforeCursorPosition}${text}`;
         textArea.value = currentValue;
         cursorIndex = Number(curString.length);
-        props.updateMarkdownState(currentValue);
-        props.setCursorPos(cursorIndex);
+        props.updateMarkdownState(currentValue, cursorIndex);
 
     }
     const formatText = (defaultText, enclosingTextStart, enclosingTextEnd) => {
@@ -101,8 +100,7 @@ const EditingIcons = (props) => {
         textArea.value = currentValue;
         // get last inserted character index position
         cursorIndex = Number(curString.length);
-        props.updateMarkdownState(currentValue);
-        props.setCursorPos(cursorIndex);
+        props.updateMarkdownState(currentValue, cursorIndex);
     }
 
     return (
@@ -188,8 +186,7 @@ const Nav = (props) => {
         textArea.value = currentValue;
         // get last inserted character index position
         cursorIndex = Number(curString.length);
-        props.updateMarkdownState(currentValue);
-        props.setCursorPos(cursorIndex);
+        props.updateMarkdownState(currentValue, cursorIndex);
         toggleModal();
     }
 

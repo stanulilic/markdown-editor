@@ -62,6 +62,7 @@ This is a paragraph`];
 
 
     useEffect(() => {
+        // scroll to the bottom on page load
         const editorWrapperNode = editorWrapper.current;
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
         const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
@@ -100,13 +101,18 @@ This is a paragraph`];
         setUndoState(true);
     }
 
-    const updateMarkdownState =(newValue) => {
+    const updateMarkdownState =(newValue, cursorIndex) => {
         // update state when buttons such as bold, italic, etc
         // is clicked
         const newMdHistory = mdHistory.slice(0, historyStep + 1);
         setMdHistory(newMdHistory.concat([newValue]));
         setHistoryStep(historyStep += 1);
         setMarkdown(newValue);
+
+        const textArea = getTextArea();
+        textArea.selectionStart = cursorIndex;
+        textArea.selectionEnd = cursorIndex;
+        textArea.focus();
     };
 
     const onScrollHandler = (e) => {
