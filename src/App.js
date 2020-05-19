@@ -44,9 +44,11 @@ This is a paragraph`];
     const [md, setMarkdown] = useState(mdHistory[0]);
     let [historyStep, setHistoryStep] = useState(0);
     const [cursorPos, setCursorPos] = useState(md);
+    const [undoState, setUndoState] = useState(false);
     const editorWrapper = useRef(null);
 
     useEffect(() =>{
+        // set cursor to the end of the default text
         const textArea = getTextArea();
         textArea.focus();
         textArea.selectionStart = cursorPos;
@@ -73,7 +75,21 @@ This is a paragraph`];
         mdPreviewElement.scrollTop = mdPreviewElement.scrollHeight;
     }, []);
 
+    const handleRedo = () => {
+        // undo to previous state
+        const textArea = getTextArea();
+        if(historyStep === mdHistory.length -1 ) {
+            return;
+        }
+        const newHistoryStep = historyStep + 1;
+        setHistoryStep(newHistoryStep);
+        const next = mdHistory[newHistoryStep];
+        setMarkdown(next);
+        textArea.value = next;
+    }
+
     const handleUndo = () => {
+        // undo to previous state
         const textArea = getTextArea();
         if(historyStep === 0) {
             return;
@@ -83,9 +99,12 @@ This is a paragraph`];
         const previous = mdHistory[newHistoryStep];
         setMarkdown(previous);
         textArea.value = previous;
+        setUndoState(true);
     }
 
     const updateMarkdownState =(newValue) => {
+        // update state when buttons such as bold, italic, etc
+        // is clicked
         const newMdHistory = mdHistory.slice(0, historyStep + 1);
         setMdHistory(newMdHistory.concat([newValue]));
         setHistoryStep(historyStep += 1);
@@ -93,6 +112,7 @@ This is a paragraph`];
     };
 
     const onScrollHandler = (e) => {
+        // sync texteditor and preview windows
         const editorWrapperNode = editorWrapper.current;
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
         const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
@@ -112,17 +132,21 @@ This is a paragraph`];
     }
 
     const renderMarkdown = (markdown) => {
+        // convert markdown to html
         const rawHtml = marked(markdown);
         return {__html: rawHtml}
 
     }
 
     const changeHandler = (e) => {
+        // save state on each keypress
         const value = e.target.value;
         setMarkdown(value);
     }
 
     const keyDownHandler = (event) => {
+       // save state in history if backspace or delete or enter key
+       // is pressed
         const key = event.keyCode || event.charCode;
        // backspace: 8, delete: 46, enter: 13 
        if(key === 8 || key === 46 || key === 13){
@@ -135,7 +159,7 @@ This is a paragraph`];
     }
 
     const getTextArea = () => {
-
+        // get textarea from dom using refs
         const editorWrapperNode = editorWrapper.current;
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
         return textAreaElement;
@@ -148,7 +172,9 @@ This is a paragraph`];
      getTextArea={getTextArea} setCursorPos={setCursorPos}  
      updateMarkdownState={updateMarkdownState}
      handleUndo={handleUndo}
-     historyStep={historyStep} />
+     handleRedo={handleRedo}
+     historyStep={historyStep}
+     undoState={undoState} />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />

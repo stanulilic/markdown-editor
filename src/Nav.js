@@ -107,7 +107,7 @@ const EditingIcons = (props) => {
 
     return (
         <div className="navbar__editing nav-child">
-            <IconElement  title="Redo" label="Redo"><RedoIcon /></IconElement>
+            <IconElement  handleClick={() => { props.handleRedo()}} title="Redo" label="Redo" disabled={!props.undoState}><RedoIcon /></IconElement>
             <IconElement  handleClick={() => { props.handleUndo()}} title="Undo" label="Undo" disabled={!props.historyStep}><UndoIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
             <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
@@ -203,6 +203,8 @@ const Nav = (props) => {
                 updateMarkdownState={props.updateMarkdownState}
                 setCursorPos={props.setCursorPos}
                 handleUndo={props.handleUndo}
+                handleRedo={props.handleRedo}
+                undoState={props.undoState}
                 historyStep={props.historyStep} />
                 <NavbarMainTools />
                 { showModal ? (

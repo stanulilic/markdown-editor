@@ -57,11 +57,11 @@ svg {
 }
 
 button:disabled svg {
-    fill: #6c757d;
+    fill: #2c5473;
 }
 
 .navbar button:disabled:hover svg {
-    fill: #6c757d;
+    fill: #2c5473;
 }
 
 header {
