@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Modal from './Modal.js';
 import { ReactComponent as BoldIcon} from './icons/bold.svg';
 import { ReactComponent as LinkIcon} from './icons/chain.svg';
 import { ReactComponent as CodeIcon} from './icons/code.svg';
@@ -22,6 +21,7 @@ import { ReactComponent as CloseIcon } from './icons/close.svg';
 import { ReactComponent as MarkdownIcon } from './icons/markdown.svg';
 import { ReactComponent as PdfIcon } from './icons/pdf.svg';
 import { ReactComponent as HtmlIcon } from './icons/embed.svg';
+import Modal from './Modal.js';
 
 const IconElement = (props) => {
     return (
@@ -167,19 +167,19 @@ const NavbarMainTools = (props) => {
                         </div>
                         <div className="modal__body">
                             <h1>Save As</h1>
-                            <div class="modal__saveicons">
-                                <div class="save-markdown">
+                            <div className="modal__saveicons">
+                                <button className="save-markdown">
                                     <MarkdownIcon />
                                     <span>Markdown</span>
-                                </div>
-                                <div class="save-html">
+                                </button>
+                                <button onClick={()=> {props.saveAsHtml(toggleModal)}} className="save-html">
                                     <HtmlIcon />
                                     <span>HTML</span>
-                                </div>
-                                <div class="save-pdf">
+                                </button>
+                                <button className="save-pdf">
                                     <PdfIcon />
                                     <span>PDF</span>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         </div>
@@ -265,7 +265,8 @@ const Nav = (props) => {
                 historyStep={props.historyStep} />
                 <NavbarMainTools setMarkdown={props.setMarkdown}
                 getTextArea={props.getTextArea}
-                saveHistory={props.saveHistory} />
+                saveHistory={props.saveHistory}
+                saveAsHtml={props.saveAsHtml} />
                 { showModal ? (
                     <Modal>
                     <div className="modal__wrap">

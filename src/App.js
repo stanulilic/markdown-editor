@@ -3,6 +3,7 @@ import TextEditor from './TextEditor';
 import MarkdownPreviewer from './MarkdownPreviewer';
 import Nav from './Nav';
 import marked from 'marked';
+import FileSaver from 'file-saver';
 
 const App = () => {
     let mdInitialHistory = [`
@@ -143,6 +144,13 @@ This is a paragraph`];
 
     }
 
+    const saveAsHtml = (hideModal) => {
+        const content = marked(md);
+        const blob = new Blob([content], {type: "text/html;charset=utf-8"});
+        FileSaver.saveAs(blob, "newHtmlDocument.html");
+        hideModal();
+    }
+
     const changeHandler = (e) => {
         // save state on each keypress
         const value = e.target.value;
@@ -185,7 +193,9 @@ This is a paragraph`];
      historyStep={historyStep}
      undoState={undoState}
      setMarkdown={setMarkdown}
-     saveHistory={saveHistory} />
+     saveHistory={saveHistory}
+     saveAsHtml={saveAsHtml}
+      />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />
