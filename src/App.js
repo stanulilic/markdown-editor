@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import TextEditor from './TextEditor';
 import MarkdownPreviewer from './MarkdownPreviewer';
 import Nav from './Nav';
+import ButtonBar from './ButtonBar';
 import marked from 'marked';
 import FileSaver from 'file-saver';
 import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 const App = () => {
     let mdInitialHistory = [`
@@ -159,11 +162,15 @@ This is a paragraph`];
         hideModal();
     }
 
-    const saveAsPDF = (hideModal) => {
-        const content = marked(md);
-        const doc = new jsPDF();
-        doc.fromHTML(content,10, 10)
-        doc.save('newDocument.pdf');
+    const saveAsPDF = (hideModal, quality) => {
+        const editorWrapperNode = editorWrapper.current;
+        const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
+        const filename = 'newDocument.pdf';
+        html2canvas(mdPreviewElement, {scale: quality}).then(canvas => {
+            let pdf = new jsPDF('p', 'mm', 'a4');
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+            pdf.save(filename);
+        });
     }
 
     const changeHandler = (e) => {
@@ -216,6 +223,7 @@ This is a paragraph`];
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />
+         <ButtonBar />
          <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
         </div>
     </div>

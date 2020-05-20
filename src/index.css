@@ -135,13 +135,17 @@ p code {
 
 .split {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 36px 1fr;
     height: 100vh;
     padding-top: 2rem;
 }
 
 .editor-col {
     padding: 0 1rem;
+}
+
+.editor {
+    padding-right: 0;
 }
 
 .markdown-input {
@@ -156,6 +160,16 @@ p code {
     padding-bottom: 8rem;
 }
 
+.buttonbar {
+    padding-top: 1rem;
+    border-right: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+}
+
+.buttonbar svg {
+    fill: grey;
+    margin-bottom: 1rem;
+}
 
 .markdown-previewer {
     padding-bottom: 8rem;

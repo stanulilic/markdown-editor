@@ -2,9 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ReactComponent as BoldIcon} from './icons/bold.svg';
 import { ReactComponent as LinkIcon} from './icons/chain.svg';
 import { ReactComponent as CodeIcon} from './icons/code.svg';
-import { ReactComponent as ColumnsIcon} from './icons/columns.svg';
-import { ReactComponent as ToggleIcon} from './icons/crosshairs.svg';
-import { ReactComponent as EyeIcon} from './icons/eye.svg';
 import { ReactComponent as ImageIcon} from './icons/file-image-o.svg';
 import { ReactComponent as HeadingIcon} from './icons/header.svg';
 import { ReactComponent as ItalicIcon} from './icons/italic.svg';
@@ -176,7 +173,7 @@ const NavbarMainTools = (props) => {
                                     <HtmlIcon />
                                     <span>HTML</span>
                                 </button>
-                                <button onClick={()=> {props.saveAsPDF(toggleModal)}} className="save-pdf">
+                                <button onClick={()=> {props.saveAsPDF(toggleModal, 2)}} className="save-pdf">
                                     <PdfIcon />
                                     <span>PDF</span>
                                 </button>
