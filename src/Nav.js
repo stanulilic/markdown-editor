@@ -15,10 +15,13 @@ import { ReactComponent as UlListIcon} from './icons/list-ul.svg';
 import { ReactComponent as PencilIcon} from './icons/pencil.svg';
 import { ReactComponent as BlockQuoteIcon} from './icons/quote-right.svg';
 import { ReactComponent as DownloadIcon} from './icons/download.svg';
-import { ReactComponent as OpenFileIcon} from './icons/folder-open.svg';
+import { ReactComponent as OpenFileIcon} from './icons/upload2.svg';
 import { ReactComponent as RedoIcon} from './icons/redo2.svg';
 import { ReactComponent as UndoIcon} from './icons/undo2.svg';
 import { ReactComponent as CloseIcon } from './icons/close.svg';
+import { ReactComponent as MarkdownIcon } from './icons/markdown.svg';
+import { ReactComponent as PdfIcon } from './icons/pdf.svg';
+import { ReactComponent as HtmlIcon } from './icons/embed.svg';
 
 const IconElement = (props) => {
     return (
@@ -122,8 +125,12 @@ const EditingIcons = (props) => {
 }
 
 const NavbarMainTools = (props) => {
+    const [ showModal, setModal] = useState(false);
     const inputEl = useRef(null);
 
+    const toggleModal = () => {
+        setModal(!showModal)
+    };
     const readMarkdownFile = (e) => {
         const file = e.target.files[0];
         if(!file) {
@@ -146,7 +153,39 @@ const NavbarMainTools = (props) => {
         <div className="navbar__maintools nav-child">
             <input onChange={(e) => {readMarkdownFile(e)}} type="file" id="upload" name="upload" ref={inputEl} />
             <IconElement  handleClick={() => { inputEl.current.click() }} title="Open File" label="Open File"><OpenFileIcon /></IconElement>
-            <IconElement  title="Export" label="Export"><DownloadIcon /></IconElement>
+            <IconElement  handleClick={() => {toggleModal()}} title="Export" label="Export"><DownloadIcon /></IconElement>
+            { showModal ? (
+                <Modal>
+                    <div className="modal__wrap">
+                        <div  className="modal__content">
+                         <div className="modal__header">
+                            <button  onClick={() => {toggleModal()}}
+                             className="modal__close-btn" id="close-modal" 
+                             title="close modal" arial-label="Close Modal">
+                          <CloseIcon />
+                        </button>
+                        </div>
+                        <div className="modal__body">
+                            <h1>Save As</h1>
+                            <div class="modal__saveicons">
+                                <div class="save-markdown">
+                                    <MarkdownIcon />
+                                    <span>Markdown</span>
+                                </div>
+                                <div class="save-html">
+                                    <HtmlIcon />
+                                    <span>HTML</span>
+                                </div>
+                                <div class="save-pdf">
+                                    <PdfIcon />
+                                    <span>PDF</span>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </Modal>
+            ):null }
         </div>
     )
 } 

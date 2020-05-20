@@ -164,7 +164,7 @@ p code {
     overflow-y: scroll;
 }
 
-/* Modal */
+/* Modal - markdown formatting modal*/
 .modal__wrap {
     position: fixed;
     width: 100%;
@@ -228,4 +228,37 @@ p code {
 .modal__okay-btn {
     background: #2196f3;
     color: #fff;
+}
+
+/* modal - export or save as */
+
+.modal__saveicons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@supports (display:grid) {
+    .modal__saveicons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .modal__saveicons div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.modal__saveicons svg {
+    fill: black;
+    width: 60px;
+    height: 60px;
+}
+
+.modal__saveicons span {
+    display: block;
+    margin-top: 11px;
 }
