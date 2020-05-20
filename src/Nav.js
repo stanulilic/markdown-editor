@@ -176,7 +176,7 @@ const NavbarMainTools = (props) => {
                                     <HtmlIcon />
                                     <span>HTML</span>
                                 </button>
-                                <button className="save-pdf">
+                                <button onClick={()=> {props.saveAsPDF(toggleModal)}} className="save-pdf">
                                     <PdfIcon />
                                     <span>PDF</span>
                                 </button>
@@ -267,7 +267,8 @@ const Nav = (props) => {
                 getTextArea={props.getTextArea}
                 saveHistory={props.saveHistory}
                 saveAsHtml={props.saveAsHtml}
-                saveAsMarkdown={props.saveAsMarkdown} />
+                saveAsMarkdown={props.saveAsMarkdown}
+                saveAsPDF={props.saveAsPDF} />
                 { showModal ? (
                     <Modal>
                     <div className="modal__wrap">

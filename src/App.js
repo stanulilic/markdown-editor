@@ -4,6 +4,7 @@ import MarkdownPreviewer from './MarkdownPreviewer';
 import Nav from './Nav';
 import marked from 'marked';
 import FileSaver from 'file-saver';
+import * as jsPDF from 'jspdf';
 
 const App = () => {
     let mdInitialHistory = [`
@@ -158,6 +159,13 @@ This is a paragraph`];
         hideModal();
     }
 
+    const saveAsPDF = (hideModal) => {
+        const content = marked(md);
+        const doc = new jsPDF();
+        doc.fromHTML(content,10, 10)
+        doc.save('newDocument.pdf');
+    }
+
     const changeHandler = (e) => {
         // save state on each keypress
         const value = e.target.value;
@@ -203,6 +211,7 @@ This is a paragraph`];
      saveHistory={saveHistory}
      saveAsHtml={saveAsHtml}
      saveAsMarkdown={saveAsMarkdown}
+     saveAsPDF={saveAsPDF}
       />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
