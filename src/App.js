@@ -151,6 +151,13 @@ This is a paragraph`];
         hideModal();
     }
 
+    const saveAsMarkdown = (hideModal) => {
+        const content = md;
+        const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, "newMarkdownDocument.md");
+        hideModal();
+    }
+
     const changeHandler = (e) => {
         // save state on each keypress
         const value = e.target.value;
@@ -195,6 +202,7 @@ This is a paragraph`];
      setMarkdown={setMarkdown}
      saveHistory={saveHistory}
      saveAsHtml={saveAsHtml}
+     saveAsMarkdown={saveAsMarkdown}
       />
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>

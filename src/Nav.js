@@ -168,7 +168,7 @@ const NavbarMainTools = (props) => {
                         <div className="modal__body">
                             <h1>Save As</h1>
                             <div className="modal__saveicons">
-                                <button className="save-markdown">
+                                <button onClick={()=> {props.saveAsMarkdown(toggleModal)}} className="save-markdown">
                                     <MarkdownIcon />
                                     <span>Markdown</span>
                                 </button>
@@ -266,7 +266,8 @@ const Nav = (props) => {
                 <NavbarMainTools setMarkdown={props.setMarkdown}
                 getTextArea={props.getTextArea}
                 saveHistory={props.saveHistory}
-                saveAsHtml={props.saveAsHtml} />
+                saveAsHtml={props.saveAsHtml}
+                saveAsMarkdown={props.saveAsMarkdown} />
                 { showModal ? (
                     <Modal>
                     <div className="modal__wrap">
