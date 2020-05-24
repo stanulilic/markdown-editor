@@ -13,6 +13,7 @@ body {
     font-size: 1rem;
     color: rgba(0, 0, 0, .8);
     overflow: hidden;
+    margin-top: 39px;
 }
 
 
@@ -62,6 +63,14 @@ button {
     border: 0;
 }
 
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
 input[type="file"] {
     position: absolute;
     top: -100px;
@@ -78,6 +87,7 @@ button:disabled svg {
 header {
     position: fixed;
     width: 100%;
+    top: 0;
 }
 
 .navbar {
@@ -111,7 +121,6 @@ blockquote {
     color: rgba(0, 0, 0, .5);
     padding-left: 1.5em;
     border-left: 5px solid rgba(0, 0, 0, .5);
-    ;
 }
 
 pre {
@@ -130,14 +139,14 @@ p code {
 
 .editor-container {
     line-height: 1.6;
-    padding-top: 39px;
 }
 
 .split {
     display: grid;
     grid-template-columns: 1fr 36px 1fr;
-    height: 100vh;
-    padding-top: 2rem;
+    /* height: 100vh; */
+    height: calc(100vh - 39px) !important;
+    /* padding-top: 2rem; */
 }
 
 .editor-col {
@@ -179,6 +188,21 @@ p code {
 .markdown-input {
     max-height: 100vh;
     overflow-y: scroll;
+    /* avoid text breaking out */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 
 /* Modal - markdown formatting modal*/
