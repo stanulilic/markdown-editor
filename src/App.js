@@ -49,6 +49,7 @@ This is a paragraph`];
     const [cursorPos, setCursorPos] = useState(md);
     const [undoState, setUndoState] = useState(false);
     const editorWrapper = useRef(null);
+    const appWrapper = useRef(null);
 
     useEffect(() =>{
         // set cursor to the end of the default text
@@ -147,6 +148,16 @@ This is a paragraph`];
         return {__html: rawHtml}
 
     }
+    const getDomElements = () => {
+        const appWrapperNode = appWrapper.current;
+        const headerElement = appWrapperNode.querySelector('header');
+        const editorWrapper = appWrapperNode.querySelector('.editor-wrapper');
+        return {
+            headerElement,
+            editorWrapper,
+        }
+
+    }
 
     const saveAsHtml = (hideModal) => {
         const content = marked(md);
@@ -206,7 +217,7 @@ This is a paragraph`];
     }
 
     return (
-    <div>
+    <div className="container" ref={appWrapper}>
      <Nav 
      getTextArea={getTextArea} setCursorPos={setCursorPos}  
      updateMarkdownState={updateMarkdownState}
@@ -223,7 +234,7 @@ This is a paragraph`];
     <div className="editor-container">
         <div className="split editor-wrapper" ref={editorWrapper}>
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />
-         <ButtonBar />
+         <ButtonBar getDomElements={getDomElements} />
          <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
         </div>
     </div>

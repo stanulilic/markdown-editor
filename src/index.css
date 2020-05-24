@@ -76,6 +76,20 @@ input[type="file"] {
     top: -100px;
 }
 
+/* css for js */
+.remove-margin {
+    margin-top: 0 !important;
+}
+
+.fullheight {
+    height: 100vh !important;
+}
+
+.hide {
+    display: none;
+}
+
+
 button:disabled svg {
     fill: #2c5473;
 }
@@ -145,7 +159,7 @@ p code {
     display: grid;
     grid-template-columns: 1fr 36px 1fr;
     /* height: 100vh; */
-    height: calc(100vh - 39px) !important;
+    height: calc(100vh - 39px);
     /* padding-top: 2rem; */
 }
 

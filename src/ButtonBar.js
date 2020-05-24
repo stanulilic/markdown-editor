@@ -4,10 +4,17 @@ import { ReactComponent as EyeIcon} from './icons/eye.svg';
 import { ReactComponent as ShowNavIcon} from './icons/chevron-up.svg';
 import { ReactComponent as ShowBottomNavIcon} from './icons/chevron-down.svg';
 
-const ButtonBar = () => {
+const ButtonBar = (props) => {
+    const toggleNav = () => {
+        document.body.classList.toggle('remove-margin');
+        const { headerElement, editorWrapper } = props.getDomElements();
+        headerElement.classList.toggle('hide');
+        editorWrapper.classList.toggle('fullheight');
+
+    }
     return (
         <div className="buttonbar">
-            <button className="buttonbar__button">
+            <button onClick={() => {toggleNav()}} className="buttonbar__button">
                 <ShowNavIcon />
             </button>
             <button className="buttonbar__button">
