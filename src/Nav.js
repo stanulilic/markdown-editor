@@ -22,7 +22,7 @@ import Modal from './Modal.js';
 
 const IconElement = (props) => {
     return (
-            <div>
+            <div className={props.buttonType}>
                 <button onClick={props.handleClick} className="navbar__button" title={props.title} arial-label={props.label} id={props.id} disabled={props.disabled}>
                 {props.children}
                 </button>
@@ -105,18 +105,18 @@ const EditingIcons = (props) => {
 
     return (
         <div className="navbar__editing nav-child">
-            <IconElement  handleClick={() => { props.handleRedo()}} title="Redo" label="Redo" disabled={!props.undoState}><RedoIcon /></IconElement>
-            <IconElement  handleClick={() => { props.handleUndo()}} title="Undo" label="Undo" disabled={!props.historyStep}><UndoIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("*emphasized text*", "*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("# heading", "# ", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("- list item one\n- list item two", "- ", "")}} title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
-            <IconElement  handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
-            <IconElement  handleClick={() => { formatMarkdownCode()}}  title="Code" label="Code"><CodeIcon /></IconElement>
-            <IconElement  handleClick={() => {props.setMarkdownImagelink(false);props.toggleModal()}} title="Link" label="Link" id="format-link"><LinkIcon /></IconElement>
-            <IconElement  handleClick={() => {props.setMarkdownImagelink(true);props.toggleModal()}} title="Image" label="Image"><ImageIcon /></IconElement>
+            <IconElement  buttonType="redo-btn" handleClick={() => { props.handleRedo()}} title="Redo" label="Redo" disabled={!props.undoState}><RedoIcon /></IconElement>
+            <IconElement  buttonType="undo-btn" handleClick={() => { props.handleUndo()}} title="Undo" label="Undo" disabled={!props.historyStep}><UndoIcon /></IconElement>
+            <IconElement  buttonType="bold-btn" handleClick={() => {formatText("**strong text**", "**", "**")}} title="Bold" label="Bold"><BoldIcon /></IconElement>
+            <IconElement  buttonType="italic-btn" handleClick={() => {formatText("*emphasized text*", "*", "*")}} title="Italic" label="Italic"><ItalicIcon /></IconElement>
+            <IconElement  buttonType="heading-btn" handleClick={() => {formatText("# heading", "# ", "")}} title="Heading" label="Heading"><HeadingIcon /></IconElement>
+            <IconElement  buttonType="strike-btn" handleClick={() => {formatText("~~strikethrough text~~", "~~", "~~")}} title="Strikethrough" label="Strikethrough"><StrikeThroughIcon /></IconElement>
+            <IconElement  buttonType="ul-btn" handleClick={() => {formatText("- list item one\n- list item two", "- ", "")}} title="Unordered List" label="Unordered List"><UlListIcon /></IconElement>
+            <IconElement  buttonType="ol-btn" handleClick={() => {formatText("1. list item one\n2. list item two", "1. ", "")}} title="Ordered List" label="Ordered List"><OlListIcon /></IconElement>
+            <IconElement  buttonType="blockquote-btn" handleClick={() => {formatText("> Blockquote", "> ", "")}} title="Block Quote" label="Block Quote"><BlockQuoteIcon /></IconElement>
+            <IconElement  buttonType="code-btn" handleClick={() => { formatMarkdownCode()}}  title="Code" label="Code"><CodeIcon /></IconElement>
+            <IconElement  buttonType="link-btn" handleClick={() => {props.setMarkdownImagelink(false);props.toggleModal()}} title="Link" label="Link" id="format-link"><LinkIcon /></IconElement>
+            <IconElement  buttonType="imagelink-btn" handleClick={() => {props.setMarkdownImagelink(true);props.toggleModal()}} title="Image" label="Image"><ImageIcon /></IconElement>
         </div>
     )
 }

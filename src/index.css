@@ -94,7 +94,82 @@ input[type="file"] {
 }
 
 .editor-padding {
-    padding: 10px 174px 153px;
+    padding: 10px 10% 93px;
+}
+
+@media screen and (min-width:1000px) {
+    .editor-padding {
+        padding: 10px 174px 153px;
+    }
+}
+
+@media screen and (min-width:2000px) {
+    .editor-padding {
+        padding: 10px 30% 153px;
+    }
+
+}
+
+@media screen and (min-width:3000px) {
+    .editor-padding {
+        padding: 10px 35% 153px;
+    }
+
+}
+
+@media screen and (min-width:4000px) {
+    .editor-padding {
+        padding: 10px 40% 153px;
+    }
+
+}
+
+.strike-btn,
+.ul-btn,
+.ol-btn,
+.blockquote-btn,
+.code-btn,
+.link-btn,
+.imagelink-btn {
+    display: none;
+}
+
+@media screen and (min-width:378px) {
+
+    .strike-btn,
+    .ul-btn {
+        display: block;
+    }
+}
+
+@media screen and (min-width:378px) {
+    .blockquote-btn {
+        display: block;
+    }
+}
+
+@media screen and (min-width:432px) {
+    .ol-btn {
+        display: block;
+    }
+}
+
+@media screen and (min-width:472px) {
+    .code-btn {
+        display: block;
+    }
+}
+
+@media screen and (min-width:524px) {
+    .link-btn {
+        display: block;
+    }
+}
+
+@media screen and (min-width:550px) {
+    .imagelink-btn {
+        display: block;
+    }
 }
 
 
