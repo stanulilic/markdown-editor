@@ -77,6 +77,14 @@ input[type="file"] {
     display: none !important;
 }
 
+.hide-visibility {
+    visibility: hidden;
+}
+
+.col-1 {
+    grid-template-columns: 1fr !important;
+}
+
 .col-2 {
     grid-template-columns: 1fr 36px !important;
 }

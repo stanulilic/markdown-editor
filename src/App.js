@@ -156,11 +156,17 @@ This is a paragraph`];
         const editorWrapper = appWrapperNode.querySelector('.editor-wrapper');
         const  mdPreviewElement = appWrapperNode.querySelector('.markdown-previewer');
         const  textAreaElement = appWrapperNode.querySelector('textarea');
+        const  buttonBarElement = appWrapperNode.querySelector('.buttonbar');
+        const  navBarEditingElement = appWrapperNode.querySelector('.navbar__editing');
+        const  openFileElement = appWrapperNode.querySelector('.navbar__maintools > div');
         return {
             headerElement,
             editorWrapper,
             mdPreviewElement,
             textAreaElement,
+            buttonBarElement,
+            navBarEditingElement,
+            openFileElement
         }
 
     }
