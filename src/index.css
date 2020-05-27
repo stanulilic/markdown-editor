@@ -86,7 +86,7 @@ input[type="file"] {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .col-2 {
@@ -240,7 +240,7 @@ p code {
 
 .split {
     display: grid;
-    grid-template-columns: 1fr 36px 1fr;
+    grid-template-columns: 1fr 36px;
     /* height: 100vh; */
     height: calc(100vh - 39px);
     /* padding-top: 2rem; */
@@ -251,7 +251,7 @@ p code {
 }
 
 .editor {
-    padding-right: 0;
+    padding-right: 0 !important;
 }
 
 .markdown-input {
@@ -279,6 +279,7 @@ p code {
 
 .markdown-previewer {
     padding-bottom: 8rem;
+    display: none;
 }
 
 .markdown-previewer,
@@ -301,6 +302,47 @@ p code {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+@media screen and (min-width:664px) {
+    .split {
+        grid-template-columns: 1fr 36px 1fr;
+    }
+
+    .markdown-previewer {
+        display: block;
+    }
+}
+
+@media screen and (min-width:2000px) {
+    .editor-col {
+        padding: 0 5%;
+    }
+
+    .markdown-input {
+        padding-right: 5%;
+    }
+}
+
+@media screen and (min-width:2300px) {
+    .editor-col {
+        padding: 0 10%;
+    }
+
+    .markdown-input {
+        padding-right: 10%;
+    }
+}
+
+@media screen and (min-width:2700px) {
+    .editor-col {
+        padding: 0 25%;
+    }
+
+    .markdown-input {
+        padding-right: 35%;
+    }
+}
+
 
 /* Modal - markdown formatting modal*/
 .modal__wrap {
