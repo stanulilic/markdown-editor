@@ -81,12 +81,20 @@ input[type="file"] {
     margin-top: 0 !important;
 }
 
-.fullheight {
+.full-height {
     height: 100vh !important;
 }
 
 .hide {
     display: none;
+}
+
+.col-2 {
+    grid-template-columns: 1fr 36px !important;
+}
+
+.editor-padding {
+    padding: 10px 174px 153px;
 }
 
 

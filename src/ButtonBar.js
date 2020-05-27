@@ -9,7 +9,15 @@ const ButtonBar = (props) => {
         document.body.classList.toggle('remove-margin');
         const { headerElement, editorWrapper } = props.getDomElements();
         headerElement.classList.toggle('hide');
-        editorWrapper.classList.toggle('fullheight');
+        editorWrapper.classList.toggle('full-height');
+
+    }
+
+    const makeTextareaFullscreen = () => {
+        const { editorWrapper, mdPreviewElement, textAreaElement } = props.getDomElements();
+        editorWrapper.classList.toggle('col-2');
+        mdPreviewElement.classList.toggle('hide');
+        textAreaElement.classList.toggle('editor-padding');
 
     }
     return (
@@ -17,7 +25,7 @@ const ButtonBar = (props) => {
             <button onClick={() => {toggleNav()}} className="buttonbar__button">
                 <ShowNavIcon />
             </button>
-            <button className="buttonbar__button">
+            <button onClick={() => makeTextareaFullscreen()} className="buttonbar__button">
                 <ColumnsIcon />
             </button>
             <button className="buttonbar__button">

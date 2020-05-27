@@ -73,11 +73,13 @@ This is a paragraph`];
         const  textAreaElement = editorWrapperNode.querySelector('textarea');
         const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
 
+        if(!(mdPreviewElement.className === 'hide')){
         textAreaElement.addEventListener('scroll', onScrollHandler);
         mdPreviewElement.addEventListener('scroll', onScrollHandler);
         // scroll to bottom
         textAreaElement.scrollTop = textAreaElement.scrollHeight;
         mdPreviewElement.scrollTop = mdPreviewElement.scrollHeight;
+        }
     }, []);
 
     const handleRedo = () => {
@@ -134,7 +136,7 @@ This is a paragraph`];
 
         if(e.target.className === 'markdown-input'){
         mdPreviewElement.scrollTop = textAreaElement.scrollTop;
-        }else {
+        }else if(!mdPreviewElement === 'hide'){
         textAreaElement.scrollTop = mdPreviewElement.scrollTop;
         }
     }
@@ -152,9 +154,13 @@ This is a paragraph`];
         const appWrapperNode = appWrapper.current;
         const headerElement = appWrapperNode.querySelector('header');
         const editorWrapper = appWrapperNode.querySelector('.editor-wrapper');
+        const  mdPreviewElement = appWrapperNode.querySelector('.markdown-previewer');
+        const  textAreaElement = appWrapperNode.querySelector('textarea');
         return {
             headerElement,
             editorWrapper,
+            mdPreviewElement,
+            textAreaElement,
         }
 
     }
