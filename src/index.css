@@ -17,26 +17,6 @@ body {
 }
 
 
-textarea::-webkit-scrollbar,
-.markdown-previewer::-webkit-scrollbar {
-    width: 7px;
-    /* width of the entire scrollbar */
-}
-
-textarea::-webkit-scrollbar-track,
-.markdown-previewer::-webkit-scrollbar-track {
-    background: #fff;
-    /* color of the tracking area */
-}
-
-textarea::-webkit-scrollbar-thumb,
-.markdown-previewer::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    /* roundness of the scroll thumb */
-    background-color: rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-}
-
 
 h1,
 h2,
@@ -45,6 +25,14 @@ h4,
 h5,
 h6 {
     font-weight: 700;
+    line-height: 2.33;
+}
+
+h1:after,
+h2:after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid hsla(0, 0%, 50%, .33);
 }
 
 a {
@@ -54,7 +42,7 @@ a {
 svg {
     width: 20px;
     height: 20px;
-    fill: #fff;
+    fill: #f6f9f9;
 }
 
 button {
@@ -174,11 +162,11 @@ input[type="file"] {
 
 
 button:disabled svg {
-    fill: #2c5473;
+    fill: #15423e;
 }
 
 .navbar button:disabled:hover svg {
-    fill: #2c5473;
+    fill: #15423e;
 }
 
 header {
@@ -190,7 +178,7 @@ header {
 .navbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #2196F3;
+    background: #009688;
     padding: 0 .5rem;
 }
 
@@ -274,8 +262,21 @@ p code {
 
 .buttonbar svg {
     fill: grey;
-    margin-bottom: 1rem;
 }
+
+.buttonbar__button {
+    padding-top: .5rem;
+    padding-bottom: .4rem;
+}
+
+.buttonbar__button:hover {
+    background: #c4dad8;
+}
+
+.buttonbar__button:hover svg {
+    fill: #fff;
+}
+
 
 .markdown-previewer {
     padding-bottom: 8rem;
@@ -302,6 +303,27 @@ p code {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+textarea::-webkit-scrollbar,
+.markdown-previewer::-webkit-scrollbar {
+    width: 7px;
+    /* width of the entire scrollbar */
+}
+
+textarea::-webkit-scrollbar-track,
+.markdown-previewer::-webkit-scrollbar-track {
+    background: #fff;
+    /* color of the tracking area */
+}
+
+textarea::-webkit-scrollbar-thumb,
+.markdown-previewer::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    /* roundness of the scroll thumb */
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 
 @media screen and (min-width:664px) {
     .split {
@@ -383,6 +405,10 @@ p code {
     fill: grey;
 }
 
+.modal__close-btn:hover svg {
+    fill: #d28989;
+}
+
 .modal__label {
     display: block;
     margin-bottom: .7rem;
@@ -405,9 +431,17 @@ p code {
     padding: 0.5rem .8rem;
 }
 
+.modal-footer__btn:hover {
+    background: #f1f1f1;
+}
+
 .modal__okay-btn {
     background: #2196f3;
     color: #fff;
+}
+
+.modal__okay-btn:hover {
+    background: hsla(207, 90%, 69%, 1);
 }
 
 /* modal - export or save as */
@@ -416,6 +450,15 @@ p code {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.modal__saveicons button {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.modal__saveicons button:hover {
+    background: #f7f7f7;
 }
 
 @supports (display:grid) {
