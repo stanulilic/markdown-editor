@@ -22,12 +22,15 @@ const ButtonBar = (props) => {
     const makePreviewFullscreen = () => {
         const { editorWrapper, mdPreviewElement, textAreaElement, 
             buttonBarElement, navBarEditingElement, openFileElement } = props.getDomElements();
-
-        editorWrapper.classList.toggle('col-1');
-        textAreaElement.classList.toggle('hide');
-        openFileElement.classList.toggle('hide-visibility')
-        navBarEditingElement.classList.toggle('hide-visibility');
+        if(mdPreviewElement.classList.contains('hide')) {
+        editorWrapper.classList.remove('col-2');
+        mdPreviewElement.classList.remove('hide');
+        }
         buttonBarElement.classList.toggle('hide');
+        openFileElement.classList.toggle('hide-visibility')
+        textAreaElement.classList.toggle('hide');
+        navBarEditingElement.classList.toggle('hide-visibility');
+        editorWrapper.classList.toggle('col-1');
         mdPreviewElement.classList.toggle('editor-padding');
         mdPreviewElement.classList.toggle('editor-col');
 
