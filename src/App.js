@@ -158,8 +158,6 @@ This is a paragraph`];
         const  mdPreviewElement = appWrapperNode.querySelector('.markdown-previewer');
         const  textAreaElement = appWrapperNode.querySelector('textarea');
         const  buttonBarElement = appWrapperNode.querySelector('.buttonbar');
-        const  navBarEditingElement = appWrapperNode.querySelector('.navbar__editing');
-        const  openFileElement = appWrapperNode.querySelector('.navbar__maintools > div');
         const  editButton = appWrapperNode.querySelector('.edit-button');
         return {
             headerElement,
@@ -167,21 +165,18 @@ This is a paragraph`];
             mdPreviewElement,
             textAreaElement,
             buttonBarElement,
-            navBarEditingElement,
-            openFileElement,
             editButton
         }
 
     }
     const showEditMode = () => {
         const { editorWrapper, mdPreviewElement, textAreaElement, 
-            buttonBarElement, navBarEditingElement, openFileElement,
+            buttonBarElement, headerElement,
         editButton } = getDomElements();
         // check eye button was clicked when textarea was in fullscreen mode
+        headerElement.classList.toggle('hide');
         buttonBarElement.classList.toggle('hide');
-        openFileElement.classList.toggle('hide-visibility')
         textAreaElement.classList.toggle('hide');
-        navBarEditingElement.classList.toggle('hide-visibility');
         editorWrapper.classList.toggle('col-1');
         mdPreviewElement.classList.toggle('editor-padding');
         mdPreviewElement.classList.toggle('editor-col');
