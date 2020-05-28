@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TextEditor from './TextEditor';
 import MarkdownPreviewer from './MarkdownPreviewer';
+import { ReactComponent as PencilIcon} from './icons/pencil.svg';
 import Nav from './Nav';
 import ButtonBar from './ButtonBar';
 import marked from 'marked';
@@ -159,6 +160,7 @@ This is a paragraph`];
         const  buttonBarElement = appWrapperNode.querySelector('.buttonbar');
         const  navBarEditingElement = appWrapperNode.querySelector('.navbar__editing');
         const  openFileElement = appWrapperNode.querySelector('.navbar__maintools > div');
+        const  editButton = appWrapperNode.querySelector('.edit-button');
         return {
             headerElement,
             editorWrapper,
@@ -166,8 +168,25 @@ This is a paragraph`];
             textAreaElement,
             buttonBarElement,
             navBarEditingElement,
-            openFileElement
+            openFileElement,
+            editButton
         }
+
+    }
+    const showEditMode = () => {
+        const { editorWrapper, mdPreviewElement, textAreaElement, 
+            buttonBarElement, navBarEditingElement, openFileElement,
+        editButton } = getDomElements();
+        // check eye button was clicked when textarea was in fullscreen mode
+        buttonBarElement.classList.toggle('hide');
+        openFileElement.classList.toggle('hide-visibility')
+        textAreaElement.classList.toggle('hide');
+        navBarEditingElement.classList.toggle('hide-visibility');
+        editorWrapper.classList.toggle('col-1');
+        mdPreviewElement.classList.toggle('editor-padding');
+        mdPreviewElement.classList.toggle('editor-col');
+        mdPreviewElement.classList.toggle('show');
+        editButton.classList.toggle('show');
 
     }
 
@@ -248,6 +267,9 @@ This is a paragraph`];
          <TextEditor text={md} keyDownHandler={keyDownHandler}  changeHandler={changeHandler} />
          <ButtonBar getDomElements={getDomElements} />
          <MarkdownPreviewer renderMarkdown={renderMarkdown(md)} />
+        <button onClick={() => showEditMode()} className="edit-button">
+            <PencilIcon />
+        </button>
         </div>
     </div>
     </div>

@@ -21,7 +21,9 @@ const ButtonBar = (props) => {
     }
     const makePreviewFullscreen = () => {
         const { editorWrapper, mdPreviewElement, textAreaElement, 
-            buttonBarElement, navBarEditingElement, openFileElement } = props.getDomElements();
+            buttonBarElement, navBarEditingElement, openFileElement,
+        editButton } = props.getDomElements();
+        // check eye button was clicked when textarea was in fullscreen mode
         if(mdPreviewElement.classList.contains('hide')) {
         editorWrapper.classList.remove('col-2');
         mdPreviewElement.classList.remove('hide');
@@ -33,6 +35,8 @@ const ButtonBar = (props) => {
         editorWrapper.classList.toggle('col-1');
         mdPreviewElement.classList.toggle('editor-padding');
         mdPreviewElement.classList.toggle('editor-col');
+        mdPreviewElement.classList.toggle('show');
+        editButton.classList.toggle('show');
 
     }
     return (

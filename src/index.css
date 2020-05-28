@@ -25,7 +25,20 @@ h4,
 h5,
 h6 {
     font-weight: 700;
-    line-height: 2.33;
+    line-height: 1.33;
+}
+
+@media screen and (min-width: 800px) {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 2.33;
+    }
+
 }
 
 h1:after,
@@ -64,6 +77,23 @@ input[type="file"] {
     top: -100px;
 }
 
+.edit-button {
+    position: absolute;
+    background: #545858;
+    right: 10px;
+    top: 49px;
+    padding: .4rem;
+    display: none;
+}
+
+.edit-button:hover {
+    background: #656565;
+}
+
+.edit-button:hover svg {
+    fill: #fff;
+}
+
 /* css for js */
 .remove-margin {
     margin-top: 0 !important;
@@ -75,6 +105,10 @@ input[type="file"] {
 
 .hide {
     display: none !important;
+}
+
+.show {
+    display: block !important;
 }
 
 .hide-visibility {

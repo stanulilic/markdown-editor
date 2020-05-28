@@ -8,7 +8,6 @@ import { ReactComponent as ItalicIcon} from './icons/italic.svg';
 import { ReactComponent as StrikeThroughIcon} from './icons/strikethrough.svg';
 import { ReactComponent as OlListIcon} from './icons/list-ol.svg';
 import { ReactComponent as UlListIcon} from './icons/list-ul.svg';
-import { ReactComponent as PencilIcon} from './icons/pencil.svg';
 import { ReactComponent as BlockQuoteIcon} from './icons/quote-right.svg';
 import { ReactComponent as DownloadIcon} from './icons/download.svg';
 import { ReactComponent as OpenFileIcon} from './icons/upload2.svg';

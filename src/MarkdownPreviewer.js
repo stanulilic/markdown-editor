@@ -4,7 +4,8 @@ const MarkdownPreviewer = (props) => {
     return (
         <div 
         className="markdown-previewer editor-col" 
-        dangerouslySetInnerHTML={props.renderMarkdown} />
+        dangerouslySetInnerHTML={props.renderMarkdown}>
+        </div>
     )
 
 }
