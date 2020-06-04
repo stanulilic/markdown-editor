@@ -4,6 +4,7 @@ import MarkdownPreviewer from './MarkdownPreviewer';
 import { ReactComponent as PencilIcon} from './icons/pencil.svg';
 import Nav from './Nav';
 import ButtonBar from './ButtonBar';
+import useLocalStorage from './LocalStorageHook';
 import marked from 'marked';
 import FileSaver from 'file-saver';
 import * as jsPDF from 'jspdf';
@@ -45,7 +46,7 @@ ordered list items:
 This is a paragraph`];
    
     const [mdHistory, setMdHistory] = useState(mdInitialHistory);
-    const [md, setMarkdown] = useState(mdHistory[0]);
+    const [md, setMarkdown] = useLocalStorage('savedState', mdHistory[0]);
     let [historyStep, setHistoryStep] = useState(0);
     const [cursorPos, setCursorPos] = useState(md);
     const [undoState, setUndoState] = useState(false);
@@ -62,10 +63,8 @@ This is a paragraph`];
     }, [cursorPos]);
 
     useEffect(() => {
-        console.log(mdHistory);
-        console.log(historyStep);
-
-    }, [md, mdHistory, historyStep]);
+        localStorage.setItem('savedState', md);
+    }, [md]);
 
 
     useEffect(() => {
