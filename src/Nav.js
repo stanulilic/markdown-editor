@@ -172,7 +172,7 @@ const NavbarMainTools = (props) => {
                                     <HtmlIcon />
                                     <span>HTML</span>
                                 </button>
-                                <button onClick={()=> {props.saveAsPDF(toggleModal, 2)}} className="save-pdf">
+                                <button onClick={()=> {props.saveAsPDF(toggleModal)}} className="save-pdf">
                                     <PdfIcon />
                                     <span>PDF</span>
                                 </button>

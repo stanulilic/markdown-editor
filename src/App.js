@@ -198,15 +198,12 @@ This is a paragraph`];
         hideModal();
     }
 
-    const saveAsPDF = (hideModal, quality) => {
-        const editorWrapperNode = editorWrapper.current;
-        const  mdPreviewElement = editorWrapperNode.querySelector('.markdown-previewer');
+    const saveAsPDF = (hideModal) => {
+        const content = marked(md);
         const filename = 'newDocument.pdf';
-        html2canvas(mdPreviewElement, {scale: quality}).then(canvas => {
-            let pdf = new jsPDF('p', 'mm', 'a4');
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-            pdf.save(filename);
-        });
+        const doc = new jsPDF();
+        doc.fromHTML(content,10, 10)
+        doc.save(filename);
     }
 
     const changeHandler = (e) => {
