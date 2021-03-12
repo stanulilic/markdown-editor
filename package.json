@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "marked": "^1.0.0",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
